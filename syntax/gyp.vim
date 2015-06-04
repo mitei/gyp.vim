@@ -26,24 +26,22 @@ syn match   pythonNumber
 syn match   pythonNumber
 \ "\%(^\|\W\)\@<=\d*\.\d\+\%([eE][+-]\=\d\+\)\=[jJ]\=\>"
 
-syn match   GYPMerge /[+=?]\ze["']/ contained
-syn match   GYPDefaultVariable /%\ze["']/ contained
-syn match   GYPExclusionList /!\ze["']/ contained
-syn match   GYPPatternList /\/\ze["']/ contained
+syn match   GYPMerge /\(['"]\).*[+=?]\1/hs=e-1,he=e-1
+syn match   GYPDefaultVariable /\(['"]\).*%\1/hs=e-1,he=e-1
+syn match   GYPExclusionList /\(['"]\).*!\1/hs=e-1,he=e-1
+syn match   GYPPatternList /\(['"]\).*\/\1/hs=e-1,he=e-1
 
 syn region  GYPVariableExpansion oneline matchgroup=GYPExpansion start=/[<>]@\?(/ end=/)/ contains=GYPPredefinedVariables contained
 syn region  GYPCommandExpansion oneline matchgroup=GYPExpansion start=/<\?!@\?(/ end=/)/ contains=GYPCommandExpansion contained
 
-syn region  GYPDQString oneline start=/"/ skip=/\\"/ end=/"/ contains=GYPTopLevelKeywords,GYPOtherKeywords,GYPPredefinedKeywords,GYPMSBuildTools,GYPLibrary,GYPExpansion,GYPVariableExpansion,GYPCommandExpansion,GYPMerge,GYPDefaultVariable,GYPExclusionList,GYPPatternList,GYPPRedefinedValues,GYPPredefinedVariables
-syn region  GYPSQString oneline start=/'/ skip=/\\'/ end=/'/ contains=GYPTopLevelKeywords,GYPOtherKeywords,GYPPredefinedKeywords,GYPMSBuildTools,GYPLibrary,GYPExpansion,GYPVariableExpansion,GYPCommandExpansion,GYPMerge,GYPDefaultVariable,GYPExclusionList,GYPPatternList,GYPPredefinedValues,GYPPredefinedVariables
+syn region  GYPString oneline start=+\z(['"]\)+ skip="\\\z1" end="\z1" contains=GYPTopLevelKeywords,GYPOtherKeywords,GYPPredefinedKeywords,GYPMSBuildTools,GYPLibrary,GYPExpansion,GYPVariableExpansion,GYPCommandExpansion,GYPMerge,GYPDefaultVariable,GYPExclusionList,GYPPatternList,GYPPRedefinedValues,GYPPredefinedVariables
 
 command -nargs=+ HiLink hi def link <args>
 HiLink GYPCommentTodo         Todo
 HiLink GYPComment             Comment
 HiLink pythonNumber           Number
 HiLink GYPLibrary             Label
-HiLink GYPDQString            String
-HiLink GYPSQString            String
+HiLink GYPString              String
 HiLink GYPTopLevelKeywords    Statement
 HiLink GYPOtherKeywords       Keyword
 HiLink GYPPredefinedVariables Identifier
