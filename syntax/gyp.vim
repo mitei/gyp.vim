@@ -26,10 +26,10 @@ syn match   pythonNumber
 syn match   pythonNumber
 \ "\%(^\|\W\)\@<=\d*\.\d\+\%([eE][+-]\=\d\+\)\=[jJ]\=\>"
 
-syn match   GYPMerge /\(['"]\).*[+=?]\1/hs=e-1,he=e-1
-syn match   GYPDefaultVariable /\(['"]\).*%\1/hs=e-1,he=e-1
-syn match   GYPExclusionList /\(['"]\).*!\1/hs=e-1,he=e-1
-syn match   GYPPatternList /\(['"]\).*\/\1/hs=e-1,he=e-1
+syn match   GYPMerge /\(['"]\).*\zs[+=?]\1\@=/
+syn match   GYPDefaultVariable /\(['"]\).*\zs%\1\@=/
+syn match   GYPExclusionList /\(['"]\).*\zs!\1\@=/
+syn match   GYPPatternList /\(['"]\).*\zs\/\1\@=/
 
 syn region  GYPVariableExpansion oneline matchgroup=GYPExpansion start=/[<>]@\?(/ end=/)/ contains=GYPPredefinedVariables contained
 syn region  GYPCommandExpansion oneline matchgroup=GYPExpansion start=/<\?!@\?(/ end=/)/ contains=GYPCommandExpansion contained
